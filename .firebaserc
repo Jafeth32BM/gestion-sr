@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gestion-sr": {
+      "hosting": {
+        "gestion-sr": [
+          "gestion-sr"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gestion-sr"
+  }
+}
