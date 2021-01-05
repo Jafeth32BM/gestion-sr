@@ -33,14 +33,12 @@ export class RegisterComponent {
   private async register(email: string, password: string): Promise<void> {
     try {
       await this.auth.register(email, password);
+      await this.auth.signIn(email, password);
     } catch (e) {
       this.showErrorMessage(e.message);
       this.loading = false;
       this.registerForm.enable();
-      return;
     }
-    await this.auth.signIn(email, password);
-    this.router.navigate(['']);
   }
 
   private showErrorMessage(message: string): void {

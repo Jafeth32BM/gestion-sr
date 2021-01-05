@@ -28,9 +28,7 @@ export class LoginComponent {
       this.showErrorMessage(e.message);
       this.loading = false;
       this.registerForm.enable();
-      return;
     }
-    this.router.navigate(['']);
   }
 
   private showErrorMessage(message: string): void {

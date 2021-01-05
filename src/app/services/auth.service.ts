@@ -10,9 +10,9 @@ import { User } from './../models/user';
 })
 export class AuthService {
   data$ = new BehaviorSubject<User>(undefined);
-  user$ = new BehaviorSubject<any>(undefined);
+  user$ = new BehaviorSubject<firebase.User>(undefined);
   private firestoreSubscription: Subscription;
-  private signedIn: boolean = false;
+  private signedIn = false;
   constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore, private router: Router) {
     this.afAuth.authState
       .subscribe((user) => {
@@ -20,9 +20,11 @@ export class AuthService {
         if (user && user.uid) {
           this.subscribeFirestore(user.uid);
           this.signedIn = true;
+          this.router.navigate(['']);
         } else {
           this.unsubscribeFirestore();
           this.signedIn = false;
+          this.router.navigate(['login']);
         }
       });
   }
@@ -30,11 +32,11 @@ export class AuthService {
   private subscribeFirestore(uid: string): void {
     this.unsubscribeFirestore();
     this.firestoreSubscription = this.firestore.doc<User>(`user/${uid}`).valueChanges().subscribe((user: User) => {
-      this.user$.next(user);
+      this.data$.next(user);
     });
   }
 
-  private unsubscribeFirestore() {
+  private unsubscribeFirestore(): void {
     if (this.firestoreSubscription) {
       this.firestoreSubscription.unsubscribe();
     }
@@ -49,11 +51,11 @@ export class AuthService {
     this.afAuth.signOut();
   }
 
-  register(email: string, password: string) {
+  register(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  signIn(email: string, password: string) {
+  signIn(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 }
