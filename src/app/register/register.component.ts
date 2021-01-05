@@ -32,7 +32,8 @@ export class RegisterComponent {
 
   private async register(email: string, password: string): Promise<void> {
     try {
-      await this.auth.register(email, password);
+      const credentials = await this.auth.register(email, password);
+      this.sendVerificationEmail(credentials);
       await this.auth.signIn(email, password);
     } catch (e) {
       this.showErrorMessage(e.message);
@@ -46,5 +47,11 @@ export class RegisterComponent {
     setTimeout(() => {
       this.errorMessage = undefined;
     }, 5000);
+  }
+
+  private sendVerificationEmail(credentials: firebase.auth.UserCredential): void {
+    try {
+      credentials.user.sendEmailVerification();
+    } catch {}
   }
 }

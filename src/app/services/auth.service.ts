@@ -58,4 +58,12 @@ export class AuthService {
   signIn(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
+
+  getVerificationEmail(): void {
+    const user = this.user$.getValue();
+    if (user) {
+      user.sendEmailVerification();
+    }
+    this.user$.getValue().sendEmailVerification();
+  }
 }

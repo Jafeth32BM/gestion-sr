@@ -1,1 +1,14 @@
-<p>home works!</p>
+<div class="w-full flex flex-col items-center mt-8" *ngIf="auth.user$ | async as user">
+  <h1>Welcome {{ user.email }}</h1>
+  <div *ngIf="user.emailVerified === false; else emailVerifiedTemplate">
+    <div>Your email is not verified.</div>
+    <div>Check your inbox at {{ user.email }}</div>
+    <div class="mt-4">
+      <div>Didn't received an email?</div>
+      <button mat-raised-button (click)="getVerificationEmail()">Send a new verification email</button>
+    </div>
+  </div>
+  <ng-template #emailVerifiedTemplate>
+    Email verified
+  </ng-template>
+</div>
