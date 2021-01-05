@@ -15,15 +15,18 @@ export class RegisterComponent {
     password2: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
   errorMessage: string;
+  loading: boolean;
 
   constructor(private auth: AuthService, private router: Router) { }
 
-  async submit() {
+  submit(): void {
     const { email, password, password2 } = this.registerForm.value;
     if (password === password2) {
+      this.loading = true;
+      this.registerForm.disable();
       this.register(email, password);
     } else {
-      console.log('nope');
+      this.showErrorMessage('Passwords are not identical');
     }
   }
 
@@ -31,16 +34,19 @@ export class RegisterComponent {
     try {
       await this.auth.register(email, password);
     } catch (e) {
-      console.log(e?.message);
-      console.log('register error:', e);
-      this.errorMessage = e.message;
-      setTimeout(() => {
-        this.errorMessage = undefined;
-      }, 5000);
+      this.showErrorMessage(e.message);
+      this.loading = false;
+      this.registerForm.enable();
       return;
     }
     await this.auth.signIn(email, password);
-    this.router.navigate([]);
+    this.router.navigate(['']);
   }
 
+  private showErrorMessage(message: string): void {
+    this.errorMessage = message;
+    setTimeout(() => {
+      this.errorMessage = undefined;
+    }, 5000);
+  }
 }

@@ -15,11 +15,15 @@
       <input formControlName="password2" matInput type="password">
       <mat-icon matSuffix>vpn_key</mat-icon>
     </mat-form-field>
-    <button class="mb-4" mat-raised-button color="primary" [disabled]="registerForm.invalid" (click)="submit()">Register</button>
+    <button class="mb-4" mat-raised-button color="primary" [disabled]="registerForm.invalid || loading"
+      (click)="submit()">Register</button>
     <p *ngIf="errorMessage" class="text-red-600 pt-2">
       <strong>
         {{ errorMessage }}
       </strong>
     </p>
+    <div class="flex justify-center w-full mt-4">
+      <mat-spinner diameter="35" *ngIf="loading"></mat-spinner>
+    </div>
   </form>
 </div>
