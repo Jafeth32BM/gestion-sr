@@ -26,6 +26,9 @@
       <input formControlName="semestre" matInput>
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
-    <button color="primary" mat-raised-button [disabled]="servicioSocialForm.invalid" (click)="save()">Guardar</button>
+    <button color="primary" mat-raised-button [disabled]="servicioSocialForm.invalid || loading" (click)="save()">Guardar</button>
   </form>
+  <div class="flex justify-center w-full mt-4">
+    <mat-spinner diameter="35" *ngIf="loading"></mat-spinner>
+  </div>
 </div>
