@@ -1,1 +1,4 @@
-<p>residencia works!</p>
+<h1 class="text-center p-4">Residencia</h1>
+<div class="px-4" *ngIf="organizationsService.organizations$ | async as organizations">
+  <app-organizations-table [organizations]="organizations"></app-organizations-table>
+</div>

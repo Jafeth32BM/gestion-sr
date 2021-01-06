@@ -23,6 +23,10 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ServicioSocialComponent } from './servicio-social/servicio-social.component';
 import { ResidenciaComponent } from './residencia/residencia.component';
+import { OrganizationsTableComponent } from './organizations-table/organizations-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -33,6 +37,7 @@ import { ResidenciaComponent } from './residencia/residencia.component';
     HomeComponent,
     ServicioSocialComponent,
     ResidenciaComponent,
+    OrganizationsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,9 @@ import { ResidenciaComponent } from './residencia/residencia.component';
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

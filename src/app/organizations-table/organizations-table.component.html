@@ -1,0 +1,55 @@
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Numero Column -->
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+      <td mat-cell *matCellDef="let row">{{row.numero}}</td>
+    </ng-container>
+
+    <!-- Empresa Column -->
+    <ng-container matColumnDef="empresa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Empresa</th>
+      <td mat-cell *matCellDef="let row">{{row.empresa}}</td>
+    </ng-container>
+
+    <!-- Domicilio Column -->
+    <ng-container matColumnDef="domicilio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio</th>
+      <td mat-cell *matCellDef="let row">{{row.domicilio}}</td>
+    </ng-container>
+
+    <!-- typoConvenio Column -->
+    <ng-container matColumnDef="typoConvenio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Typo Convenio</th>
+      <td mat-cell *matCellDef="let row">{{row.typoConvenio}}</td>
+    </ng-container>
+
+    <!-- vigencia Column -->
+    <ng-container matColumnDef="vigencia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vigencia</th>
+      <td mat-cell *matCellDef="let row">{{row.vigencia}}</td>
+    </ng-container>
+
+    <!-- carreras Column -->
+    <ng-container matColumnDef="carreras">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Carreras</th>
+      <td mat-cell *matCellDef="let row">{{row.carreras}}</td>
+    </ng-container>
+
+    <!-- contacto Column -->
+    <ng-container matColumnDef="contacto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto</th>
+      <td mat-cell *matCellDef="let row">{{row.contacto}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 50, 100]">
+  </mat-paginator>
+</div>
