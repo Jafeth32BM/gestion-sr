@@ -1,3 +1,4 @@
+import { EmpresasComponent } from './empresas/empresas.component';
 import { VerifiedProfileGuard } from './guards/verified-profile.guard';
 import { AdminResidenciaComponent } from './admin-residencia/admin-residencia.component';
 import { AdminServicioSocialComponent } from './admin-servicio-social/admin-servicio-social.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
     canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard]
   },
   { path: 'residencia-admin', component: AdminResidenciaComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard] },
+  { path: 'listado-empresas', component: EmpresasComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: 'residencia', component: ResidenciaComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: '**', redirectTo: '' },
 ];

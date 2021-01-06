@@ -7,12 +7,13 @@
         <ng-container *ngIf="auth.data$ | async as userData">
           <ng-container *ngIf="!userData.admin; else adminMenu">
             <a mat-list-item routerLink="servicio-social">Servicio social</a>
+            <a mat-list-item routerLink="residencia">Residencia</a>
           </ng-container>
           <ng-template #adminMenu>
             <a mat-list-item routerLink="servicio-social-admin">Servicio social admin</a>
             <a mat-list-item routerLink="residencia-admin">Residencia admin</a>
           </ng-template>
-          <a mat-list-item routerLink="residencia">Residencia</a>
+          <a mat-list-item routerLink="listado-empresas">Listado de empresas</a>
           <a mat-list-item (click)="auth.signOut()">Logout</a>
         </ng-container>
       </ng-container>

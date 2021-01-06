@@ -29,6 +29,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AdminServicioSocialComponent } from './admin-servicio-social/admin-servicio-social.component';
 import { AdminResidenciaComponent } from './admin-residencia/admin-residencia.component';
+import { EmpresasComponent } from './empresas/empresas.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AdminResidenciaComponent } from './admin-residencia/admin-residencia.co
     OrganizationsTableComponent,
     AdminServicioSocialComponent,
     AdminResidenciaComponent,
+    EmpresasComponent,
   ],
   imports: [
     BrowserModule,
