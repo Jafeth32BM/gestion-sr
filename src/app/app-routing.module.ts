@@ -1,3 +1,5 @@
+import { ResidenciaComponent } from './residencia/residencia.component';
+import { ServicioSocialComponent } from './servicio-social/servicio-social.component';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { NotAuthenticatedGuard } from './guards/not-authenticated.guard';
 import { HomeComponent } from './home/home.component';
@@ -10,6 +12,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthenticatedGuard] },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthenticatedGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthenticatedGuard] },
+  { path: 'servicio-social', component: ServicioSocialComponent, canActivate: [AuthenticatedGuard] },
+  { path: 'residencia', component: ResidenciaComponent, canActivate: [AuthenticatedGuard] },
   { path: '**', redirectTo: '' },
 ];
 

@@ -20,6 +20,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { ServicioSocialComponent } from './servicio-social/servicio-social.component';
+import { ResidenciaComponent } from './residencia/residencia.component';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    ServicioSocialComponent,
+    ResidenciaComponent,
   ],
   imports: [
     BrowserModule,

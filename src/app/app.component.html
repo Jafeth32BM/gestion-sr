@@ -4,6 +4,8 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <ng-container *ngIf="auth.isSignedIn(); else notSignedInTemplate">
+        <a mat-list-item routerLink="servicio-social">Servicio social</a>
+        <a mat-list-item routerLink="residencia">Residencia</a>
         <a mat-list-item (click)="auth.signOut()">Logout</a>
       </ng-container>
       <ng-template #notSignedInTemplate>
