@@ -5,4 +5,5 @@ export interface UserData {
   apellido2: string;
   matricula: string;
   semestre: string;
+  admin: boolean;
 }

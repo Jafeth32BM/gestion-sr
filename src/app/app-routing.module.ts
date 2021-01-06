@@ -1,3 +1,5 @@
+import { AdminResidenciaComponent } from './admin-residencia/admin-residencia.component';
+import { AdminServicioSocialComponent } from './admin-servicio-social/admin-servicio-social.component';
 import { ResidenciaComponent } from './residencia/residencia.component';
 import { ServicioSocialComponent } from './servicio-social/servicio-social.component';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NotAuthenticatedGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthenticatedGuard] },
   { path: 'servicio-social', component: ServicioSocialComponent, canActivate: [AuthenticatedGuard] },
+  { path: 'servicio-social-admin', component: AdminServicioSocialComponent, canActivate: [AuthenticatedGuard] },
+  { path: 'residencia-admin', component: AdminResidenciaComponent, canActivate: [AuthenticatedGuard] },
   { path: 'residencia', component: ResidenciaComponent, canActivate: [AuthenticatedGuard] },
   { path: '**', redirectTo: '' },
 ];
