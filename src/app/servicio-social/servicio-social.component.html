@@ -1,1 +1,31 @@
-<p>servicio-social works!</p>
+<div class="w-full flex flex-col items-center mt-8">
+  <h1>Servicio social</h1>
+  <form [formGroup]="servicioSocialForm" class="form-container p-8 flex flex-col">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input formControlName="nombre" matInput>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido paterno</mat-label>
+      <input formControlName="apellido1" matInput>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido materno</mat-label>
+      <input formControlName="apellido2" matInput>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Matricula</mat-label>
+      <input formControlName="matricula" matInput>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Semestre</mat-label>
+      <input formControlName="semestre" matInput>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <button color="primary" mat-raised-button [disabled]="servicioSocialForm.invalid" (click)="save()">Guardar</button>
+  </form>
+</div>

@@ -3,13 +3,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { User } from './../models/user';
+import { UserData } from './../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  data$ = new BehaviorSubject<User>(undefined);
+  data$ = new BehaviorSubject<UserData>(undefined);
   user$ = new BehaviorSubject<firebase.User>(undefined);
   private firestoreSubscription: Subscription;
   private signedIn = false;
@@ -31,7 +31,7 @@ export class AuthService {
 
   private subscribeFirestore(uid: string): void {
     this.unsubscribeFirestore();
-    this.firestoreSubscription = this.firestore.doc<User>(`user/${uid}`).valueChanges().subscribe((user: User) => {
+    this.firestoreSubscription = this.firestore.doc<UserData>(`users/${uid}`).valueChanges().subscribe((user: UserData) => {
       this.data$.next(user);
     });
   }

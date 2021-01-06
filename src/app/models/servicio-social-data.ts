@@ -1,5 +1,4 @@
-export interface UserData {
-  uid: string;
+export interface ServicioSocialData {
   nombre: string;
   apellido1: string;
   apellido2: string;
