@@ -1,7 +1,7 @@
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './../services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,7 @@ export class RegisterComponent {
   errorMessage: string;
   loading: boolean;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private firestore: AngularFirestore) { }
 
   submit(): void {
     const { email, password, password2 } = this.registerForm.value;
@@ -34,6 +34,11 @@ export class RegisterComponent {
     try {
       const credentials = await this.auth.register(email, password);
       this.sendVerificationEmail(credentials);
+      await this.firestore.collection('users').doc(credentials.user.uid).set({
+        admin: false,
+        email: credentials.user.email,
+        uid: credentials.user.uid,
+      });
       await this.auth.signIn(email, password);
     } catch (e) {
       this.showErrorMessage(e.message);
