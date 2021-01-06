@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { UserData } from './../models/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,13 @@ export class RegistrosAlumnosService {
 
   private subscribe(): void {
     if (!this.subscribed) {
-      this.subscription = this.firestore.collection<UserData>('users').valueChanges().subscribe((usersData: UserData[]) => {
+      this.subscription = this.firestore.collection<UserData>('users').valueChanges()
+      .pipe(
+        map((usersData) => {
+          return usersData.filter((userData) => !userData.admin)
+        })
+      )
+      .subscribe((usersData: UserData[]) => {
         this.registros$.next(usersData);
       });
       this.subscribed = true;
