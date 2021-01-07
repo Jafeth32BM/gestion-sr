@@ -1,12 +1,34 @@
 <h1 class="text-center p-4 pt-8">Residencia</h1>
 <div class="flex items-center flex-col">
   <div>
+    <p>Pueden encontrar los formatos vaciós y ejemplos en la url siguiente: <a class="link"
+        (click)="goToTescha()">tescha.edomex.gob.mx/residencias_profesionales</a></p>
     <p><strong>Para solicitar tu carta de presentación se requieren los siguietes documentos:</strong></p>
-    <ul>
-      <li>Constancia de creditos</li>
-      <li>Carta formal</li>
-      <li>Historial academico</li>
-      <li>Carta responsiva</li>
-    </ul>
+
+    <div class="w-full document-table">
+      <table class="w-full">
+        <tr>
+          <th class="text-left">Documento</th>
+          <th class="text-left">Subido</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let document of documents">
+          <td>{{ document.name }}</td>
+          <td class="flex items-center icon">
+            <ng-container *ngIf="document.uploaded; else notUploaded">
+              <mat-icon class="text-green-500">done</mat-icon>
+            </ng-container>
+            <ng-template #notUploaded>
+              <mat-icon class="text-red-500">clear</mat-icon>
+            </ng-template>
+          </td>
+          <td>
+            <button mat-stroked-button (click)="upload(document.type, inputFile)">Upload</button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
+
+<input #inputFile hidden type="file" (change)="fileUpload($event)">

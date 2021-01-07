@@ -6,4 +6,5 @@ export interface UserData {
   matricula: string;
   semestre: string;
   admin: boolean;
+  documentosSubidos: number[];
 }
