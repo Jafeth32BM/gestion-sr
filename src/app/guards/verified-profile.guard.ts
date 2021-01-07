@@ -14,7 +14,8 @@ export class VerifiedProfileGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.auth.user$.getValue().emailVerified;
+    const user = this.auth.user$.getValue();
+    return !!user && user.emailVerified;
   }
 
 }

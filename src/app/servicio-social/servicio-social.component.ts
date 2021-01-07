@@ -31,12 +31,16 @@ export class ServicioSocialComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.dataSubscription = this.auth.data$.subscribe((data) => {
+      if (!data) {
+        return;
+      }
+
       this.servicioSocialForm.setValue({
-        nombre: data.nombre,
-        apellido1: data.apellido1,
-        apellido2: data.apellido2,
-        matricula: data.matricula,
-        semestre: data.semestre,
+        nombre: data.nombre || '',
+        apellido1: data.apellido1 || '',
+        apellido2: data.apellido2 || '',
+        matricula: data.matricula || '',
+        semestre: data.semestre || '',
       });
     });
   }

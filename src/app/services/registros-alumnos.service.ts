@@ -28,7 +28,7 @@ export class RegistrosAlumnosService {
       this.subscription = this.firestore.collection<UserData>('users').valueChanges()
       .pipe(
         map((usersData) => {
-          return usersData.filter((userData) => !userData.admin)
+          return usersData.filter((userData) => !userData.admin && userData.nombre);
         })
       )
       .subscribe((usersData: UserData[]) => {
