@@ -1,11 +1,12 @@
 import { Documento } from './../models/documento';
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { TipoDeDocumento } from '../enums/tipo-de-documento.e';
 import { FileTopics } from './../enums/file-topics.e';
 import { UserData } from './../models/user';
 import { AuthService } from './../services/auth.service';
 import { StorageService } from './../services/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-residencia',
@@ -21,8 +22,9 @@ export class ResidenciaComponent implements OnDestroy {
   ];
   documentToUpload: TipoDeDocumento;
   documentSubscription: Subscription;
+  uploadProgress: Observable<number>;
 
-  constructor(private storage: StorageService, private auth: AuthService) {
+  constructor(private storage: StorageService, private auth: AuthService, private snackbar: MatSnackBar) {
     this.documentSubscription = this.auth.data$
       .subscribe((userData: UserData) => {
         if (!userData || !userData.documentosSubidos) {
@@ -46,16 +48,31 @@ export class ResidenciaComponent implements OnDestroy {
     inputFile.click();
   }
 
+  async download(documento: Documento): Promise<void> {
+    const url = await this.storage
+      .getDownloadUrl(FileTopics.Residencia, documento.name.split(' ').join('-'), this.auth.user$.getValue().uid);
+    const link = document.createElement('a');
+    link.setAttribute('type', 'hidden');
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
 
   fileUpload(event): void {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
+      const document = this.documents.find((d) => d.type === this.documentToUpload);
       const file = fileList.item(0);
       console.log(file);
-      const task = this.storage.uploadFile(FileTopics.Residencia, file);
+      const task = this.storage.uploadFile(FileTopics.Residencia, file, document.name.split(' ').join('-'));
+      this.uploadProgress = task.percentageChanges();
       task.then(() => {
         this.storage.confirmUpload(this.documentToUpload);
+        this.uploadProgress = undefined;
         event.target.value = '';
+        this.snackbar.open(`Se ha subido correctamente su ${document.name}`, null, { duration: 5000, panelClass: 'snackbar-success' });
       });
     }
   }

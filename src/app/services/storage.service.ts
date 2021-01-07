@@ -13,9 +13,15 @@ export class StorageService {
 
   constructor(private storage: AngularFireStorage, private auth: AuthService, private firestore: AngularFirestore) { }
 
-  uploadFile(topic: FileTopics, file: File): AngularFireUploadTask {
+  uploadFile(topic: FileTopics, file: File, fileName: string): AngularFireUploadTask {
     const uid = this.auth.user$.getValue().uid;
-    return this.storage.upload(`${topic}/${uid}/${file.name}`, file);
+    const extention = this.getFileNameExtention(file.name);
+    return this.storage.upload(`${topic}/${uid}/${fileName}.${extention}`, file);
+  }
+
+  private getFileNameExtention(fileName: string): string {
+    const splitedName = fileName.split('.');
+    return splitedName[splitedName.length - 1];
   }
 
   confirmUpload(documentType: TipoDeDocumento): void {
@@ -25,5 +31,15 @@ export class StorageService {
         { documentosSubidos: firebase.firestore.FieldValue.arrayUnion(documentType) }, { merge: true }
       );
     }
+  }
+
+  async getDownloadUrl(topic: FileTopics, fileName: string, uid: string): Promise<any> {
+    const documents = await this.storage.ref(`${topic}/${uid}`).listAll().toPromise();
+    for (const document of documents.items) {
+      if (document.name.startsWith(fileName)) {
+        return document.getDownloadURL();
+      }
+    }
+    return Promise.reject();
   }
 }
