@@ -29,9 +29,8 @@ import { OrganizationsTableComponent } from './organizations-table/organizations
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { AdminServicioSocialComponent } from './admin-servicio-social/admin-servicio-social.component';
-import { AdminResidenciaComponent } from './admin-residencia/admin-residencia.component';
 import { EmpresasComponent } from './empresas/empresas.component';
+import { StudentListComponent } from './student-list/student-list.component';
 
 
 @NgModule({
@@ -43,9 +42,8 @@ import { EmpresasComponent } from './empresas/empresas.component';
     ServicioSocialComponent,
     ResidenciaComponent,
     OrganizationsTableComponent,
-    AdminServicioSocialComponent,
-    AdminResidenciaComponent,
     EmpresasComponent,
+    StudentListComponent,
   ],
   imports: [
     BrowserModule,

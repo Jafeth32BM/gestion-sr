@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { UserData } from './../models/user';
+import { UserData } from '../models/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrosAlumnosService {
-  registros$ = new BehaviorSubject<UserData[]>([]);
+export class UsersService {
+  usersData$ = new BehaviorSubject<UserData[]>([]);
   private subscribed = false;
   private subscription: Subscription;
 
@@ -28,11 +28,11 @@ export class RegistrosAlumnosService {
       this.subscription = this.firestore.collection<UserData>('users').valueChanges()
       .pipe(
         map((usersData) => {
-          return usersData.filter((userData) => !userData.admin && userData.nombre);
+          return usersData.filter((userData) => !userData.admin);
         })
       )
       .subscribe((usersData: UserData[]) => {
-        this.registros$.next(usersData);
+        this.usersData$.next(usersData);
       });
       this.subscribed = true;
     }
@@ -42,7 +42,7 @@ export class RegistrosAlumnosService {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.registros$.next([]);
+    this.usersData$.next([]);
     this.subscribed = false;
   }
 }

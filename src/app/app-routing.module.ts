@@ -1,7 +1,6 @@
+import { StudentListComponent } from './student-list/student-list.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { VerifiedProfileGuard } from './guards/verified-profile.guard';
-import { AdminResidenciaComponent } from './admin-residencia/admin-residencia.component';
-import { AdminServicioSocialComponent } from './admin-servicio-social/admin-servicio-social.component';
 import { ResidenciaComponent } from './residencia/residencia.component';
 import { ServicioSocialComponent } from './servicio-social/servicio-social.component';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
@@ -18,12 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NotAuthenticatedGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthenticatedGuard] },
   { path: 'servicio-social', component: ServicioSocialComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
-  {
-    path: 'servicio-social-admin',
-    component: AdminServicioSocialComponent,
-    canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard]
-  },
-  { path: 'residencia-admin', component: AdminResidenciaComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard] },
+  { path: 'lista-alumnos', component: StudentListComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard] },
   { path: 'listado-empresas', component: EmpresasComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: 'residencia', component: ResidenciaComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: '**', redirectTo: '' },

@@ -1,7 +1,0 @@
-<div *ngIf="registrosService.registros$ | async as registros">
-  <div *ngFor="let registro of registros" class="registro m-4 p-4">
-    <div>
-      {{ registro.matricula }}: {{ registro.nombre }} {{ registro.apellido1 }} {{ registro.apellido2 }} (Semestre: {{ registro.semestre }})
-    </div>
-  </div>
-</div>
