@@ -34,8 +34,8 @@ export class StudentListComponent implements AfterViewInit, OnDestroy {
     this.table.dataSource = this.dataSource;
   }
 
-  openStudentProfile(userData: UserData): void {
-    this.router.navigate(['lista-alumnos', 'perfil'], { queryParams: { userData: JSON.stringify(userData) } });
+  openStudentProfile(uid: string): void {
+    this.router.navigate(['lista-alumnos', 'perfil'], { queryParams: { uid  } });
   }
 
   ngOnDestroy(): void {

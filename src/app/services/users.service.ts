@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { UserData } from '../models/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
@@ -26,14 +26,14 @@ export class UsersService {
   private subscribe(): void {
     if (!this.subscribed) {
       this.subscription = this.firestore.collection<UserData>('users').valueChanges()
-      .pipe(
-        map((usersData) => {
-          return usersData.filter((userData) => !userData.admin);
-        })
-      )
-      .subscribe((usersData: UserData[]) => {
-        this.usersData$.next(usersData);
-      });
+        .pipe(
+          map((usersData) => {
+            return usersData.filter((userData) => !userData.admin);
+          })
+        )
+        .subscribe((usersData: UserData[]) => {
+          this.usersData$.next(usersData);
+        });
       this.subscribed = true;
     }
   }
@@ -44,5 +44,14 @@ export class UsersService {
     }
     this.usersData$.next([]);
     this.subscribed = false;
+  }
+
+  selectUserData(uid: string): Observable<UserData> {
+    return this.usersData$
+      .pipe(
+        map((usersData: UserData[]) => {
+          return usersData.find((u) => u.uid = uid);
+        })
+      );
   }
 }

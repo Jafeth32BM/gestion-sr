@@ -1,3 +1,5 @@
-<h1>{{ userData.email }} {{ userData.nombre }} {{ userData.apellido1 }}</h1>
-<app-student-profile-servicio-social></app-student-profile-servicio-social>
-<app-student-profile-residencia></app-student-profile-residencia>
+<div *ngIf="userData$ | async as userData">
+  <h1>{{ userData.email }} {{ userData.nombre }} {{ userData.apellido1 }}</h1>
+  <app-student-profile-servicio-social></app-student-profile-servicio-social>
+  <app-student-profile-residencia></app-student-profile-residencia>
+</div>
