@@ -7,5 +7,6 @@ export interface UserData {
   semestre: string;
   admin: boolean;
   email: string;
+  tipoServicioSocial: 'communitario' | 'ordinario';
   documentosSubidos: number[];
 }

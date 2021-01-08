@@ -4,4 +4,5 @@ export interface ServicioSocialData {
   apellido2: string;
   matricula: string;
   semestre: string;
+  tipoServicioSocial: 'communitario' | 'ordinario';
 }

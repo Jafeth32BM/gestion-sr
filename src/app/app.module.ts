@@ -34,6 +34,7 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StudentProfileServicioSocialComponent } from './student-profile-servicio-social/student-profile-servicio-social.component';
 import { StudentProfileResidenciaComponent } from './student-profile-residencia/student-profile-residencia.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { StudentProfileResidenciaComponent } from './student-profile-residencia/
     MatPaginatorModule,
     MatSortModule,
     MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

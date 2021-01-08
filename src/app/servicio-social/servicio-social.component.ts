@@ -17,6 +17,7 @@ export class ServicioSocialComponent implements OnInit, OnDestroy {
     apellido2: new FormControl(''),
     matricula: new FormControl('', [Validators.required]),
     semestre: new FormControl('', [Validators.required]),
+    tipoServicioSocial: new FormControl('', [Validators.required]),
   });
   dataSubscription: Subscription;
   loading = false;
@@ -41,6 +42,7 @@ export class ServicioSocialComponent implements OnInit, OnDestroy {
         apellido2: data.apellido2 || '',
         matricula: data.matricula || '',
         semestre: data.semestre || '',
+        tipoServicioSocial: data.tipoServicioSocial || '',
       });
     });
   }
