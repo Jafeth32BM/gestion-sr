@@ -32,9 +32,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { StudentProfileServicioSocialComponent } from './student-profile-servicio-social/student-profile-servicio-social.component';
-import { StudentProfileResidenciaComponent } from './student-profile-residencia/student-profile-residencia.component';
 import { MatSelectModule } from '@angular/material/select';
+import { StudentProfileTramiteComponent } from './student-profile-tramite/student-profile-tramite.component';
 
 
 @NgModule({
@@ -49,8 +48,7 @@ import { MatSelectModule } from '@angular/material/select';
     EmpresasComponent,
     StudentListComponent,
     StudentProfileComponent,
-    StudentProfileServicioSocialComponent,
-    StudentProfileResidenciaComponent,
+    StudentProfileTramiteComponent,
   ],
   imports: [
     BrowserModule,

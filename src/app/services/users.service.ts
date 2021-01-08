@@ -50,7 +50,7 @@ export class UsersService {
     return this.usersData$
       .pipe(
         map((usersData: UserData[]) => {
-          return usersData.find((u) => u.uid = uid);
+          return usersData.find((u) => u.uid === uid);
         })
       );
   }

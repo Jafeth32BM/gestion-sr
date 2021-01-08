@@ -1,0 +1,29 @@
+<div class="p-4" *ngIf="tramite">
+  <h1>{{ tramite.name }}</h1>
+  <div *ngIf="userData as user">
+    <div class="w-full document-table">
+      <table class="w-full">
+        <tr>
+          <th class="text-left">Documento</th>
+          <th class="text-left">Subido</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let document of tramite.documentos">
+          <td>{{ document.name }}</td>
+          <td class="flex items-center icon">
+            <ng-container *ngIf="uploadedFiles.get(document.tipo); else notUploaded">
+              <mat-icon class="text-green-500">done</mat-icon>
+            </ng-container>
+            <ng-template #notUploaded>
+              <mat-icon class="text-red-500">clear</mat-icon>
+            </ng-template>
+          </td>
+          <td>
+            <button mat-stroked-button *ngIf="uploadedFiles.get(document.tipo)"
+              (click)="download(document)">Download</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

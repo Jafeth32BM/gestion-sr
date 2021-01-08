@@ -1,3 +1,4 @@
+import { tramites, Tramites } from './../static-data/documentos';
 import { UsersService } from './../services/users.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,7 @@ import { UserData } from './../models/user';
 })
 export class StudentProfileComponent {
   userData$: Observable<UserData>;
+  tramites: Tramites = tramites;
 
   constructor(private route: ActivatedRoute, private usersService: UsersService) {
     this.route.queryParams.pipe(take(1))

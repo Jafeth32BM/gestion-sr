@@ -1,5 +1,5 @@
-<div *ngIf="userData$ | async as userData">
+<div *ngIf="userData$ | async as userData" class="p-4">
   <h1>{{ userData.email }} {{ userData.nombre }} {{ userData.apellido1 }}</h1>
-  <app-student-profile-servicio-social></app-student-profile-servicio-social>
-  <app-student-profile-residencia></app-student-profile-residencia>
+  <app-student-profile-tramite [tramite]="tramites.Residencia" [userData]="userData"></app-student-profile-tramite>
+  <app-student-profile-tramite *ngIf="userData.tipoServicioSocial" [tramite]="userData.tipoServicioSocial === 'ordinario' ? tramites.ServicioSocialOrdinario : tramites.ServicioSocialComunitario" [userData]="userData"></app-student-profile-tramite>
 </div>
