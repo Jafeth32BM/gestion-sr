@@ -31,6 +31,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { StudentProfileServicioSocialComponent } from './student-profile-servicio-social/student-profile-servicio-social.component';
+import { StudentProfileResidenciaComponent } from './student-profile-residencia/student-profile-residencia.component';
 
 
 @NgModule({
@@ -44,6 +47,9 @@ import { StudentListComponent } from './student-list/student-list.component';
     OrganizationsTableComponent,
     EmpresasComponent,
     StudentListComponent,
+    StudentProfileComponent,
+    StudentProfileServicioSocialComponent,
+    StudentProfileResidenciaComponent,
   ],
   imports: [
     BrowserModule,

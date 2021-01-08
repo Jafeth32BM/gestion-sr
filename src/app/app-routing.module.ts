@@ -1,3 +1,4 @@
+import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { VerifiedProfileGuard } from './guards/verified-profile.guard';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthenticatedGuard] },
   { path: 'servicio-social', component: ServicioSocialComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: 'lista-alumnos', component: StudentListComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard] },
+  { path: 'lista-alumnos/perfil', component: StudentProfileComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard, AdminGuard] },
   { path: 'listado-empresas', component: EmpresasComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: 'residencia', component: ResidenciaComponent, canActivate: [AuthenticatedGuard, VerifiedProfileGuard] },
   { path: '**', redirectTo: '' },

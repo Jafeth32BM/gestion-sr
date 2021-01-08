@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -19,9 +20,9 @@ export class StudentListComponent implements AfterViewInit, OnDestroy {
   dataSourceSubscription: Subscription;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['email', 'nombre', 'apellido1', 'apellido2'];
+  displayedColumns = ['email', 'matricula', 'nombre', 'apellido1', 'apellido2'];
 
-  constructor(public usersService: UsersService) {
+  constructor(public usersService: UsersService, private router: Router) {
     this.dataSourceSubscription = this.usersService.usersData$.subscribe((users: UserData[]) => {
       this.dataSource.data = users;
     });
@@ -31,6 +32,10 @@ export class StudentListComponent implements AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  openStudentProfile(userData: UserData): void {
+    this.router.navigate(['lista-alumnos', 'perfil'], { queryParams: { userData: JSON.stringify(userData) } });
   }
 
   ngOnDestroy(): void {
