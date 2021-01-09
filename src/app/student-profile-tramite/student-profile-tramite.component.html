@@ -11,10 +11,10 @@
         <tr *ngFor="let document of tramite.documentos">
           <td>{{ document.name }}</td>
           <td class="flex items-center icon">
-            <app-document-state [estado]="uploadedFiles.get(document.tipo)?.estado"></app-document-state>
+            <app-document-state [estado]="userData?.documentos[document.tipo]?.estado"></app-document-state>
           </td>
           <td>
-            <button *ngIf="uploadedFiles.get(document.tipo)" [matMenuTriggerFor]="menu" mat-icon-button>
+            <button *ngIf="userData?.documentos[document.tipo]" [matMenuTriggerFor]="menu" mat-icon-button>
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
