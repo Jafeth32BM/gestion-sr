@@ -24,10 +24,12 @@ export class TramiteComponent implements OnDestroy {
   uploadProgress: Observable<number>;
   userData: UserData;
   EstadoDocumento = EstadoDocumento;
+  link: string;
 
   constructor(private storage: StorageService, private auth: AuthService, private snackbar: MatSnackBar, private route: ActivatedRoute) {
     this.route.data.pipe(take(1)).subscribe((data) => {
       const tipoTramite: TipoDeTramite = data.tramite;
+      this.link = data.link;
       for (const tramiteKey in tramites) {
         if (Object.prototype.hasOwnProperty.call(tramites, tramiteKey)) {
           const tramite: Tramite = tramites[tramiteKey];
@@ -83,7 +85,7 @@ export class TramiteComponent implements OnDestroy {
   }
 
   goToTescha(): void {
-    window.open('http://tescha.edomex.gob.mx/residencias_profesionales', '_blank');
+    window.open(this.link, '_blank');
   }
 
 }

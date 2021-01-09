@@ -2,8 +2,8 @@
   <h1 class="text-center p-4 pt-8">{{ tramite.name }}</h1>
   <div class="flex items-center flex-col px-8">
     <div>
-      <p>Pueden encontrar los formatos vaciós y ejemplos en la url siguiente: <a class="link"
-          (click)="goToTescha()">tescha.edomex.gob.mx/residencias_profesionales</a></p>
+      <p *ngIf="link">Pueden encontrar los formatos vaciós y ejemplos en la url siguiente: <a class="link"
+          (click)="goToTescha()">{{ link }}</a></p>
       <p><strong>Para solicitar tu carta de presentación se requieren los siguietes documentos:</strong></p>
 
       <div class="w-full document-table">

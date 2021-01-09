@@ -49,19 +49,19 @@ const routes: Routes = [
   {
     path: 'residencia',
     component: TramiteComponent,
-    data: { tramite: TipoDeTramite.Residencia },
+    data: { tramite: TipoDeTramite.Residencia, link: 'http://tescha.edomex.gob.mx/residencias_profesionales' },
     canActivate: [AuthenticatedGuard, VerifiedProfileGuard],
   },
   {
     path: 'servicio-social-ordinario',
     component: TramiteComponent,
-    data: { tramite: TipoDeTramite.ServicioSocialOrdinario },
+    data: { tramite: TipoDeTramite.ServicioSocialOrdinario, link: 'http://tescha.edomex.gob.mx/servicio_social' },
     canActivate: [AuthenticatedGuard, VerifiedProfileGuard],
   },
   {
     path: 'servicio-social-comunitario',
     component: TramiteComponent,
-    data: { tramite: TipoDeTramite.ServicioSocialComunitario },
+    data: { tramite: TipoDeTramite.ServicioSocialComunitario, link: 'http://tescha.edomex.gob.mx/servicio_social' },
     canActivate: [AuthenticatedGuard, VerifiedProfileGuard],
   },
   { path: '**', redirectTo: '' },
