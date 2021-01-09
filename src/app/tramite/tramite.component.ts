@@ -1,28 +1,44 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { EstadoDocumento } from '../enums/estado-documento.e';
+import { FileTopics } from '../enums/file-topics.e';
 import { TipoDeDocumento } from '../enums/tipo-de-documento.e';
-import { FileTopics } from './../enums/file-topics.e';
 import { UserData } from '../models/user-data';
-import { AuthService } from './../services/auth.service';
-import { StorageService } from './../services/storage.service';
-import { Documento, Tramite, tramites } from './../static-data/documentos';
+import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
+import { Documento, TipoDeTramite, Tramite, tramites } from '../static-data/documentos';
 
 @Component({
-  selector: 'app-residencia',
-  templateUrl: './residencia.component.html',
-  styleUrls: ['./residencia.component.scss']
+  selector: 'app-tramite',
+  templateUrl: './tramite.component.html',
+  styleUrls: ['./tramite.component.scss']
 })
-export class ResidenciaComponent implements OnDestroy {
-  tramite: Tramite = tramites.Residencia;
+export class TramiteComponent implements OnDestroy {
+
+  tramite: Tramite;
   documentToUpload: TipoDeDocumento;
   documentSubscription: Subscription;
   uploadProgress: Observable<number>;
   userData: UserData;
   EstadoDocumento = EstadoDocumento;
 
-  constructor(private storage: StorageService, private auth: AuthService, private snackbar: MatSnackBar) {
+  constructor(private storage: StorageService, private auth: AuthService, private snackbar: MatSnackBar, private route: ActivatedRoute) {
+    this.route.data.pipe(take(1)).subscribe((data) => {
+      const tipoTramite: TipoDeTramite = data.tramite;
+      for (const tramiteKey in tramites) {
+        if (Object.prototype.hasOwnProperty.call(tramites, tramiteKey)) {
+          const tramite: Tramite = tramites[tramiteKey];
+          if (tramite.tipo === tipoTramite) {
+            this.tramite = tramite;
+            break;
+          }
+        }
+      }
+    });
+
     this.documentSubscription = this.auth.data$
       .subscribe((userData: UserData) => this.userData = userData);
   }
@@ -69,4 +85,5 @@ export class ResidenciaComponent implements OnDestroy {
   goToTescha(): void {
     window.open('http://tescha.edomex.gob.mx/residencias_profesionales', '_blank');
   }
+
 }

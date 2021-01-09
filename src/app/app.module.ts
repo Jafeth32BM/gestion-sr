@@ -24,7 +24,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ServicioSocialComponent } from './servicio-social/servicio-social.component';
-import { ResidenciaComponent } from './residencia/residencia.component';
 import { OrganizationsTableComponent } from './organizations-table/organizations-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -36,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { StudentProfileTramiteComponent } from './student-profile-tramite/student-profile-tramite.component';
 import { DocumentStateComponent } from './document-state/document-state.component';
+import { TramiteComponent } from './tramite/tramite.component';
 
 
 @NgModule({
@@ -45,13 +45,13 @@ import { DocumentStateComponent } from './document-state/document-state.componen
     RegisterComponent,
     HomeComponent,
     ServicioSocialComponent,
-    ResidenciaComponent,
     OrganizationsTableComponent,
     EmpresasComponent,
     StudentListComponent,
     StudentProfileComponent,
     StudentProfileTramiteComponent,
     DocumentStateComponent,
+    TramiteComponent,
   ],
   imports: [
     BrowserModule,

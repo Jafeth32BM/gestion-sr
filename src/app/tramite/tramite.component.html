@@ -1,0 +1,40 @@
+<ng-container *ngIf="tramite">
+  <h1 class="text-center p-4 pt-8">{{ tramite.name }}</h1>
+  <div class="flex items-center flex-col px-8">
+    <div>
+      <p>Pueden encontrar los formatos vaciós y ejemplos en la url siguiente: <a class="link"
+          (click)="goToTescha()">tescha.edomex.gob.mx/residencias_profesionales</a></p>
+      <p><strong>Para solicitar tu carta de presentación se requieren los siguietes documentos:</strong></p>
+
+      <div class="w-full document-table">
+        <table class="w-full">
+          <tr>
+            <th class="text-left">Documento</th>
+            <th class="text-left">Estado</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let document of tramite.documentos">
+            <td>{{ document.name }}</td>
+            <td class="flex items-center icon">
+              <app-document-state [estado]="userData?.documentos[document.tipo]?.estado"></app-document-state>
+            </td>
+            <td>
+              <button [matMenuTriggerFor]="menu" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngIf="userData?.documentos[document.tipo]" (click)="download(document)">Descargar</button>
+                <button mat-menu-item *ngIf="userData?.documentos[document.tipo]?.estado !== EstadoDocumento.Aceptado"
+                  (click)="upload(document.tipo, inputFile)">Upload</button>
+              </mat-menu>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <mat-progress-bar class="mt-4" *ngIf="uploadProgress | async as progress" mode="determinate" [value]="progress">
+      </mat-progress-bar>
+    </div>
+  </div>
+  <input #inputFile hidden type="file" accept=".docx,.pdf" multiple="false" (change)="fileUpload($event)">
+</ng-container>
