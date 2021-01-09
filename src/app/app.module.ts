@@ -35,6 +35,7 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { StudentProfileTramiteComponent } from './student-profile-tramite/student-profile-tramite.component';
+import { DocumentStateComponent } from './document-state/document-state.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { StudentProfileTramiteComponent } from './student-profile-tramite/studen
     StudentListComponent,
     StudentProfileComponent,
     StudentProfileTramiteComponent,
+    DocumentStateComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<div class="icon flex items-center">
+  <ng-container [ngSwitch]="estado">
+    <ng-container *ngSwitchCase="EstadoDocumento.Pendiente">
+      <mat-icon class="text-gray-500">pending_actions</mat-icon>
+    </ng-container>
+    <ng-container *ngSwitchCase="EstadoDocumento.Aceptado">
+      <mat-icon class="text-green-500">done</mat-icon>
+    </ng-container>
+    <ng-container *ngSwitchCase="EstadoDocumento.Rechazado">
+      <mat-icon class="text-red-500">clear</mat-icon>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <mat-icon class="text-gray-500">pending</mat-icon>
+    </ng-container>
+  </ng-container>
+</div>

@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { UserData } from './../models/user';
+import { UserData } from '../models/user-data';
 import { UsersService } from './../services/users.service';
 
 @Component({

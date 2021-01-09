@@ -3,7 +3,7 @@ export interface Organization {
   domicilio: string;
   empresa: string;
   numero: number;
-  typoConvenio: string;
+  tipoConvenio: string;
   vigencia: string;
   carreras: string;
 }

@@ -1,5 +1,5 @@
-import { DocumentoData } from './../models/user';
-import { EstadoDocumento } from './../enums/EstadoDocumento.e';
+import { DocumentoData } from '../models/user-data';
+import { EstadoDocumento } from '../enums/estado-documento.e';
 import { TipoDeDocumento } from './../enums/tipo-de-documento.e';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FileTopics } from './../enums/file-topics.e';
@@ -26,10 +26,12 @@ export class StorageService {
     return splitedName[splitedName.length - 1];
   }
 
-  confirmUpload(documentType: TipoDeDocumento): void {
-    const uid = this.auth.user$.getValue().uid;
+  changeDocumentState(documentType: TipoDeDocumento, estado: EstadoDocumento, uid?: string): void {
+    if (!uid) {
+      uid = this.auth.user$.getValue().uid;
+    }
     const documentos: { [key: number]: DocumentoData } = this.auth.data$.getValue().documentos || {};
-    documentos[documentType] = { estado: EstadoDocumento.Pendiente, uploaded_at: firebase.firestore.Timestamp.now() };
+    documentos[documentType] = { estado, uploaded_at: firebase.firestore.Timestamp.now() };
 
     if (uid) {
       this.firestore.collection('users').doc(uid).set(

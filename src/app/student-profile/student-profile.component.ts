@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { UserData } from './../models/user';
+import { UserData } from '../models/user-data';
 
 @Component({
   selector: 'app-student-profile',

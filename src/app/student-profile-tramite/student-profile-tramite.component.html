@@ -5,22 +5,13 @@
       <table class="w-full">
         <tr>
           <th class="text-left">Documento</th>
-          <th class="text-left">Subido</th>
-          <th>Estado</th>
+          <th class="text-left">Estado</th>
           <th></th>
         </tr>
         <tr *ngFor="let document of tramite.documentos">
           <td>{{ document.name }}</td>
           <td class="flex items-center icon">
-            <ng-container *ngIf="uploadedFiles.get(document.tipo); else notUploaded">
-              <mat-icon class="text-green-500">done</mat-icon>
-            </ng-container>
-            <ng-template #notUploaded>
-              <mat-icon class="text-red-500">clear</mat-icon>
-            </ng-template>
-          </td>
-          <td>
-            <!-- ESTADO -->
+            <app-document-state [estado]="uploadedFiles.get(document.tipo)?.estado"></app-document-state>
           </td>
           <td>
             <button *ngIf="uploadedFiles.get(document.tipo)" [matMenuTriggerFor]="menu" mat-icon-button>
@@ -28,8 +19,8 @@
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item (click)="download(document)">Descargar</button>
-              <button mat-menu-item (click)="aceptarDocumento()">Aceptar</button>
-              <button mat-menu-item (click)="rechazarDocumento()">Rechazar</button>
+              <button mat-menu-item (click)="aceptarDocumento(document)">Aceptar</button>
+              <button mat-menu-item (click)="rechazarDocumento(document)">Rechazar</button>
             </mat-menu>
           </td>
           <!--

@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { UserData } from '../models/user';
+import { UserData } from '../models/user-data';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';

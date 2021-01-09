@@ -1,10 +1,10 @@
-import { DocumentoData } from './../models/user';
+import { DocumentoData } from '../models/user-data';
 import { Component, Input } from '@angular/core';
 import { FileTopics } from '../enums/file-topics.e';
-import { Documento } from '../models/documento';
-import { UserData } from '../models/user';
+import { UserData } from '../models/user-data';
 import { StorageService } from '../services/storage.service';
-import { Tramite } from '../static-data/documentos';
+import { Documento, Tramite } from '../static-data/documentos';
+import { EstadoDocumento } from '../enums/estado-documento.e';
 
 @Component({
   selector: 'app-student-profile-tramite',
@@ -12,8 +12,9 @@ import { Tramite } from '../static-data/documentos';
   styleUrls: ['./student-profile-tramite.component.scss']
 })
 export class StudentProfileTramiteComponent {
+  EstadoDocumento = EstadoDocumento;
   @Input() tramite: Tramite;
-  uploadedFiles = new Map<number, boolean>();
+  uploadedFiles = new Map<number, DocumentoData>();
   userData: UserData;
   @Input('userData') set userDataChange(userData: UserData) {
     this.userData = userData;
@@ -27,9 +28,9 @@ export class StudentProfileTramiteComponent {
   constructor(private storage: StorageService) { }
 
   private checkUploadedFiles(docList: { [key: number]: DocumentoData }): void {
-    const map = new Map<number, boolean>();
+    const map = new Map<number, DocumentoData>();
     for (const doc of this.tramite.documentos) {
-      map.set(doc.tipo, !!docList[doc.tipo]);
+      map.set(doc.tipo, docList[doc.tipo]);
     }
     this.uploadedFiles = map;
   }
@@ -45,12 +46,13 @@ export class StudentProfileTramiteComponent {
     link.remove();
   }
 
-  aceptarDocumento(): void {
-
+  aceptarDocumento(documento: Documento): void {
+    console.log(documento);
+    this.storage.changeDocumentState(documento.tipo, EstadoDocumento.Aceptado, this.userData.uid);
   }
 
-  rechazarDocumento(): void {
-
+  rechazarDocumento(documento: Documento): void {
+    this.storage.changeDocumentState(documento.tipo, EstadoDocumento.Rechazado, this.userData.uid);
   }
 
 }

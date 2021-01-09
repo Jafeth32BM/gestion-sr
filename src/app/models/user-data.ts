@@ -1,4 +1,4 @@
-import { EstadoDocumento } from './../enums/EstadoDocumento.e';
+import { EstadoDocumento } from '../enums/estado-documento.e';
 export interface UserData {
   uid: string;
   nombre: string;

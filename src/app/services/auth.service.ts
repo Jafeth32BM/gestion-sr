@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { UserData } from './../models/user';
+import { UserData } from '../models/user-data';
 
 @Injectable({
   providedIn: 'root'

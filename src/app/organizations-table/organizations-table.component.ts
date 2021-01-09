@@ -19,7 +19,7 @@ export class OrganizationsTableComponent implements AfterViewInit {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['numero', 'typoConvenio', 'empresa', 'domicilio', 'vigencia', 'contacto', 'carreras'];
+  displayedColumns = ['numero', 'tipoConvenio', 'empresa', 'domicilio', 'vigencia', 'contacto', 'carreras'];
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
