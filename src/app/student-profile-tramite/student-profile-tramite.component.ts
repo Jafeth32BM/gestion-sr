@@ -1,3 +1,4 @@
+import { DocumentoData } from './../models/user';
 import { Component, Input } from '@angular/core';
 import { FileTopics } from '../enums/file-topics.e';
 import { Documento } from '../models/documento';
@@ -17,7 +18,7 @@ export class StudentProfileTramiteComponent {
   @Input('userData') set userDataChange(userData: UserData) {
     this.userData = userData;
     if (userData) {
-      this.checkUploadedFiles(userData.documentosSubidos || []);
+      this.checkUploadedFiles(userData.documentos || []);
     } else {
       this.uploadedFiles.clear();
     }
@@ -25,10 +26,10 @@ export class StudentProfileTramiteComponent {
 
   constructor(private storage: StorageService) { }
 
-  private checkUploadedFiles(docList: number[]): void {
+  private checkUploadedFiles(docList: { [key: number]: DocumentoData }): void {
     const map = new Map<number, boolean>();
     for (const doc of this.tramite.documentos) {
-      map.set(doc.tipo, docList.some((id) => id === doc.tipo));
+      map.set(doc.tipo, !!docList[doc.tipo]);
     }
     this.uploadedFiles = map;
   }
@@ -42,6 +43,14 @@ export class StudentProfileTramiteComponent {
     document.body.appendChild(link);
     link.click();
     link.remove();
+  }
+
+  aceptarDocumento(): void {
+
+  }
+
+  rechazarDocumento(): void {
+
   }
 
 }

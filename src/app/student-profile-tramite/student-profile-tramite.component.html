@@ -6,6 +6,7 @@
         <tr>
           <th class="text-left">Documento</th>
           <th class="text-left">Subido</th>
+          <th>Estado</th>
           <th></th>
         </tr>
         <tr *ngFor="let document of tramite.documentos">
@@ -19,9 +20,27 @@
             </ng-template>
           </td>
           <td>
-            <button mat-stroked-button *ngIf="uploadedFiles.get(document.tipo)"
-              (click)="download(document)">Download</button>
+            <!-- ESTADO -->
           </td>
+          <td>
+            <button *ngIf="uploadedFiles.get(document.tipo)" [matMenuTriggerFor]="menu" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="download(document)">Descargar</button>
+              <button mat-menu-item (click)="aceptarDocumento()">Aceptar</button>
+              <button mat-menu-item (click)="rechazarDocumento()">Rechazar</button>
+            </mat-menu>
+          </td>
+          <!--
+          <td>
+            <button mat-icon-button>
+              <mat-icon class="text-green-500">done</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon class="text-red-500">clear</mat-icon>
+            </button>
+          </td> -->
         </tr>
       </table>
     </div>

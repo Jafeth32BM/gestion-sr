@@ -1,3 +1,4 @@
+import { EstadoDocumento } from './../enums/EstadoDocumento.e';
 export interface UserData {
   uid: string;
   nombre: string;
@@ -8,5 +9,10 @@ export interface UserData {
   admin: boolean;
   email: string;
   tipoServicioSocial: 'communitario' | 'ordinario';
-  documentosSubidos: number[];
+  documentos: { [key: number]: DocumentoData };
+}
+
+export interface DocumentoData {
+  estado: EstadoDocumento;
+  uploaded_at: firebase.firestore.Timestamp;
 }

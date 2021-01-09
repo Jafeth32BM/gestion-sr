@@ -33,6 +33,7 @@ import { EmpresasComponent } from './empresas/empresas.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 import { StudentProfileTramiteComponent } from './student-profile-tramite/student-profile-tramite.component';
 
 
@@ -75,6 +76,7 @@ import { StudentProfileTramiteComponent } from './student-profile-tramite/studen
     MatSortModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

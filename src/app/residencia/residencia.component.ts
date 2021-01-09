@@ -27,12 +27,12 @@ export class ResidenciaComponent implements OnDestroy {
   constructor(private storage: StorageService, private auth: AuthService, private snackbar: MatSnackBar) {
     this.documentSubscription = this.auth.data$
       .subscribe((userData: UserData) => {
-        if (!userData || !userData.documentosSubidos) {
+        if (!userData || !userData.documentos) {
           return;
         }
 
         this.documents.forEach((document: Documento) => {
-          document.uploaded = userData.documentosSubidos.some((docType: number) => docType === document.type);
+          document.uploaded = !!userData.documentos[document.type];
         });
       });
   }
@@ -47,18 +47,6 @@ export class ResidenciaComponent implements OnDestroy {
     this.documentToUpload = document;
     inputFile.click();
   }
-
-  async download(documento: Documento): Promise<void> {
-    const url = await this.storage
-      .getDownloadUrl(FileTopics.Residencia, documento.name.split(' ').join('-'), this.auth.user$.getValue().uid);
-    const link = document.createElement('a');
-    link.setAttribute('type', 'hidden');
-    link.href = url;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  }
-
 
   fileUpload(event): void {
     const fileList: FileList = event.target.files;
@@ -75,6 +63,17 @@ export class ResidenciaComponent implements OnDestroy {
         this.snackbar.open(`Se ha subido correctamente su ${document.name}`, null, { duration: 5000, panelClass: 'snackbar-success' });
       });
     }
+  }
+
+  async download(documento: Documento): Promise<void> {
+    const url = await this.storage
+      .getDownloadUrl(FileTopics.Residencia, documento.name.split(' ').join('-'), this.auth.user$.getValue().uid);
+    const link = document.createElement('a');
+    link.setAttribute('type', 'hidden');
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
 
   goToTescha(): void {
