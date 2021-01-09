@@ -5,11 +5,11 @@ import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EstadoDocumento } from '../enums/estado-documento.e';
 import { FileTopics } from '../enums/file-topics.e';
-import { TipoDeDocumento } from '../enums/tipo-de-documento.e';
 import { UserData } from '../models/user-data';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { Documento, TipoDeTramite, Tramite, tramites } from '../static-data/documentos';
+import { TipoDeDocumento } from './../static-data/documentos';
 
 @Component({
   selector: 'app-tramite',

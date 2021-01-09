@@ -1,6 +1,6 @@
+import { TipoDeDocumento } from './../static-data/documentos';
 import { DocumentoData } from '../models/user-data';
 import { EstadoDocumento } from '../enums/estado-documento.e';
-import { TipoDeDocumento } from './../enums/tipo-de-documento.e';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FileTopics } from './../enums/file-topics.e';
 import { AuthService } from './auth.service';

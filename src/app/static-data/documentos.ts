@@ -1,4 +1,9 @@
-import { TipoDeDocumento } from './../enums/tipo-de-documento.e';
+export enum TipoDeDocumento {
+  ConstanciaDeCreditos,
+  CartaFormal,
+  HistorialAcademico,
+  CartaResponsiva,
+}
 
 export interface Documento {
   tipo: TipoDeDocumento;
