@@ -6,8 +6,9 @@
       <ng-container *ngIf="auth.isSignedIn(); else notSignedInTemplate">
         <ng-container *ngIf="auth.data$ | async as userData">
           <ng-container *ngIf="!userData.admin; else adminMenu">
-            <a mat-list-item routerLink="servicio-social">Servicio social</a>
+            <a mat-list-item routerLink="servicio-social">Mi perfil</a>
             <a mat-list-item routerLink="residencia">Residencia</a>
+            <a mat-list-item *ngIf="userData.tipoServicioSocial" [routerLink]="'servicio-social-' + userData.tipoServicioSocial">Servicio social</a>
           </ng-container>
           <ng-template #adminMenu>
             <a mat-list-item routerLink="lista-alumnos">Alumnos registrados</a>

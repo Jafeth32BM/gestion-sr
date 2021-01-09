@@ -52,6 +52,18 @@ const routes: Routes = [
     data: { tramite: TipoDeTramite.Residencia },
     canActivate: [AuthenticatedGuard, VerifiedProfileGuard],
   },
+  {
+    path: 'servicio-social-ordinario',
+    component: TramiteComponent,
+    data: { tramite: TipoDeTramite.ServicioSocialOrdinario },
+    canActivate: [AuthenticatedGuard, VerifiedProfileGuard],
+  },
+  {
+    path: 'servicio-social-comunitario',
+    component: TramiteComponent,
+    data: { tramite: TipoDeTramite.ServicioSocialComunitario },
+    canActivate: [AuthenticatedGuard, VerifiedProfileGuard],
+  },
   { path: '**', redirectTo: '' },
 ];
 
