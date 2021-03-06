@@ -21,4 +21,6 @@ export interface UserData {
 export interface DocumentoData {
   estado: EstadoDocumento;
   uploaded_at: firebase.firestore.Timestamp;
+  path: string;
+  url: string;
 }

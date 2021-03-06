@@ -80,10 +80,12 @@ export class TramiteComponent implements OnDestroy {
         document.name.split(' ').join('-')
       );
       this.uploadProgress = task.percentageChanges();
-      task.then(() => {
+      task.then((task: firebase.storage.UploadTaskSnapshot) => {
         this.storage.changeDocumentState(
           this.documentToUpload,
-          EstadoDocumento.Pendiente
+          EstadoDocumento.Pendiente,
+          null,
+          task.ref
         );
         this.uploadProgress = undefined;
         event.target.value = '';
@@ -96,15 +98,11 @@ export class TramiteComponent implements OnDestroy {
     }
   }
 
-  async download(documento: Documento): Promise<void> {
-    const url = await this.storage.getDownloadUrl(
-      FileTopics.Residencia,
-      documento.name.split(' ').join('-'),
-      this.auth.user$.getValue().uid
-    );
+  download(documento: Documento): void {
+    const doc = this.userData.documentos[documento.tipo];
     const link = document.createElement('a');
     link.setAttribute('type', 'hidden');
-    link.href = url;
+    link.href = doc.url;
     document.body.appendChild(link);
     link.click();
     link.remove();

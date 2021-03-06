@@ -39,19 +39,23 @@ export class StorageService {
     return splitedName[splitedName.length - 1];
   }
 
-  changeDocumentState(
+  async changeDocumentState(
     documentType: TipoDeDocumento,
     estado: EstadoDocumento,
-    uid?: string
-  ): void {
+    uid?: string,
+    ref?: firebase.storage.Reference
+  ): Promise<void> {
     if (!uid) {
       uid = this.auth.user$.getValue().uid;
     }
     const documentos: { [key: string]: DocumentoData } =
       this.auth.data$.getValue().documentos || {};
+    const url = await ref.getDownloadURL();
     documentos[documentType] = {
       estado,
       uploaded_at: firebase.firestore.Timestamp.now(),
+      path: ref.fullPath,
+      url,
     };
 
     if (uid) {
@@ -60,22 +64,5 @@ export class StorageService {
         .doc(uid)
         .set({ documentos }, { merge: true });
     }
-  }
-
-  async getDownloadUrl(
-    topic: FileTopics,
-    fileName: string,
-    uid: string
-  ): Promise<any> {
-    const documents = await this.storage
-      .ref(`${topic}/${uid}`)
-      .listAll()
-      .toPromise();
-    for (const document of documents.items) {
-      if (document.name.startsWith(fileName)) {
-        return document.getDownloadURL();
-      }
-    }
-    return Promise.reject();
   }
 }
