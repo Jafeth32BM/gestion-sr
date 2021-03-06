@@ -28,7 +28,34 @@
         <mat-option value="comunitario">Comunitario</mat-option>
       </mat-select>
     </mat-form-field>
-    <button color="primary" mat-raised-button [disabled]="servicioSocialForm.invalid || loading" (click)="save()">Guardar</button>
+    <mat-form-field appearance="outline">
+      <mat-label>CURP</mat-label>
+      <input formControlName="curp" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Direction de la dependencia</mat-label>
+      <input formControlName="directionDependencia" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre de la dependencia</mat-label>
+      <input formControlName="nombreDependencia" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre del responsable</mat-label>
+      <input formControlName="nombreResponsable" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Promedio general</mat-label>
+      <input type="number" min="0" max="10" formControlName="promedioGeneral" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Carrera</mat-label>
+      <mat-select formControlName="carrera">
+        <mat-option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button color="primary" mat-raised-button [disabled]="servicioSocialForm.invalid || loading"
+      (click)="save()">Guardar</button>
   </form>
   <div class="flex justify-center w-full mt-4">
     <mat-spinner diameter="35" *ngIf="loading"></mat-spinner>

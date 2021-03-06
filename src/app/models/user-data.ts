@@ -10,6 +10,12 @@ export interface UserData {
   email: string;
   tipoServicioSocial: 'communitario' | 'ordinario';
   documentos: { [key: number]: DocumentoData };
+  curp: string;
+  directionDependencia: string;
+  nombreDependencia: string;
+  nombreResponsable: string;
+  promedioGeneral: number;
+  carrera: string;
 }
 
 export interface DocumentoData {

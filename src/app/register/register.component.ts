@@ -6,18 +6,24 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    password2: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+    password2: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   errorMessage: string;
   loading: boolean;
 
-  constructor(private auth: AuthService, private firestore: AngularFirestore) { }
+  constructor(private auth: AuthService, private firestore: AngularFirestore) {}
 
   submit(): void {
     const { email, password, password2 } = this.registerForm.value;
@@ -38,6 +44,7 @@ export class RegisterComponent {
         admin: false,
         email: credentials.user.email,
         uid: credentials.user.uid,
+        documentos: {},
       });
       await this.auth.signIn(email, password);
     } catch (e) {
@@ -54,7 +61,9 @@ export class RegisterComponent {
     }, 5000);
   }
 
-  private sendVerificationEmail(credentials: firebase.auth.UserCredential): void {
+  private sendVerificationEmail(
+    credentials: firebase.auth.UserCredential
+  ): void {
     try {
       credentials.user.sendEmailVerification();
     } catch {}
