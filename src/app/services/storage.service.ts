@@ -50,13 +50,25 @@ export class StorageService {
     }
     const documentos: { [key: string]: DocumentoData } =
       this.auth.data$.getValue().documentos || {};
-    const url = await ref.getDownloadURL();
-    documentos[documentType] = {
-      estado,
-      uploaded_at: firebase.firestore.Timestamp.now(),
-      path: ref.fullPath,
-      url,
-    };
+    let url: string | null;
+    if (ref) {
+      url = await ref.getDownloadURL();
+    }
+    const documento = documentos[documentType];
+    if (documento) {
+      documentos[documentType] = {
+        ...documentos[documentType],
+        estado,
+        uploaded_at: firebase.firestore.Timestamp.now(),
+      };
+    } else {
+      documentos[documentType] = {
+        estado,
+        uploaded_at: firebase.firestore.Timestamp.now(),
+        path: ref.fullPath,
+        url,
+      };
+    }
 
     if (uid) {
       this.firestore
