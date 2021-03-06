@@ -9,7 +9,7 @@ export interface UserData {
   admin: boolean;
   email: string;
   tipoServicioSocial: 'communitario' | 'ordinario';
-  documentos: { [key: number]: DocumentoData };
+  documentos: { [key: string]: DocumentoData };
   curp: string;
   directionDependencia: string;
   nombreDependencia: string;

@@ -8,16 +8,20 @@ import { FileTopics } from '../enums/file-topics.e';
 import { UserData } from '../models/user-data';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
-import { Documento, TipoDeTramite, Tramite, tramites } from '../static-data/documentos';
+import {
+  Documento,
+  TipoDeTramite,
+  Tramite,
+  tramites,
+} from '../static-data/documentos';
 import { TipoDeDocumento } from './../static-data/documentos';
 
 @Component({
   selector: 'app-tramite',
   templateUrl: './tramite.component.html',
-  styleUrls: ['./tramite.component.scss']
+  styleUrls: ['./tramite.component.scss'],
 })
 export class TramiteComponent implements OnDestroy {
-
   tramite: Tramite;
   documentToUpload: TipoDeDocumento;
   documentSubscription: Subscription;
@@ -26,7 +30,12 @@ export class TramiteComponent implements OnDestroy {
   EstadoDocumento = EstadoDocumento;
   link: string;
 
-  constructor(private storage: StorageService, private auth: AuthService, private snackbar: MatSnackBar, private route: ActivatedRoute) {
+  constructor(
+    private storage: StorageService,
+    private auth: AuthService,
+    private snackbar: MatSnackBar,
+    private route: ActivatedRoute
+  ) {
     this.route.data.pipe(take(1)).subscribe((data) => {
       const tipoTramite: TipoDeTramite = data.tramite;
       this.link = data.link;
@@ -41,8 +50,9 @@ export class TramiteComponent implements OnDestroy {
       }
     });
 
-    this.documentSubscription = this.auth.data$
-      .subscribe((userData: UserData) => this.userData = userData);
+    this.documentSubscription = this.auth.data$.subscribe(
+      (userData: UserData) => (this.userData = userData)
+    );
   }
 
   ngOnDestroy(): void {
@@ -59,23 +69,39 @@ export class TramiteComponent implements OnDestroy {
   fileUpload(event): void {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      const document = this.tramite.documentos.find((d) => d.tipo === this.documentToUpload);
+      const document = this.tramite.documentos.find(
+        (d) => d.tipo === this.documentToUpload
+      );
       const file = fileList.item(0);
       console.log(file);
-      const task = this.storage.uploadFile(FileTopics.Residencia, file, document.name.split(' ').join('-'));
+      const task = this.storage.uploadFile(
+        this.tramite.topic,
+        file,
+        document.name.split(' ').join('-')
+      );
       this.uploadProgress = task.percentageChanges();
       task.then(() => {
-        this.storage.changeDocumentState(this.documentToUpload, EstadoDocumento.Pendiente);
+        this.storage.changeDocumentState(
+          this.documentToUpload,
+          EstadoDocumento.Pendiente
+        );
         this.uploadProgress = undefined;
         event.target.value = '';
-        this.snackbar.open(`Se ha subido correctamente su ${document.name}`, null, { duration: 5000, panelClass: 'snackbar-success' });
+        this.snackbar.open(
+          `Se ha subido correctamente su ${document.name}`,
+          null,
+          { duration: 5000, panelClass: 'snackbar-success' }
+        );
       });
     }
   }
 
   async download(documento: Documento): Promise<void> {
-    const url = await this.storage
-      .getDownloadUrl(FileTopics.Residencia, documento.name.split(' ').join('-'), this.auth.user$.getValue().uid);
+    const url = await this.storage.getDownloadUrl(
+      FileTopics.Residencia,
+      documento.name.split(' ').join('-'),
+      this.auth.user$.getValue().uid
+    );
     const link = document.createElement('a');
     link.setAttribute('type', 'hidden');
     link.href = url;
@@ -87,5 +113,4 @@ export class TramiteComponent implements OnDestroy {
   goToTescha(): void {
     window.open(this.link, '_blank');
   }
-
 }

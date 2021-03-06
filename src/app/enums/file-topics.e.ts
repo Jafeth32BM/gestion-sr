@@ -1,4 +1,5 @@
 export enum FileTopics {
   Residencia = 'residencia',
-  ServicioSocial = 'servicio-social',
+  ServicioSocialOrdinario = 'servicio-social-ordinario',
+  ServicioSocialComunitario = 'servicio-social-communitario',
 }
