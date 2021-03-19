@@ -6,11 +6,12 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { UserData } from '../models/user-data';
 import { UsersService } from './../services/users.service';
+import { parse } from 'json2csv';
 
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.scss']
+  styleUrls: ['./student-list.component.scss'],
 })
 export class StudentListComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,9 +24,11 @@ export class StudentListComponent implements AfterViewInit, OnDestroy {
   displayedColumns = ['email', 'matricula', 'nombre', 'apellido1', 'apellido2'];
 
   constructor(public usersService: UsersService, private router: Router) {
-    this.dataSourceSubscription = this.usersService.usersData$.subscribe((users: UserData[]) => {
-      this.dataSource.data = users;
-    });
+    this.dataSourceSubscription = this.usersService.usersData$.subscribe(
+      (users: UserData[]) => {
+        this.dataSource.data = users;
+      }
+    );
   }
 
   ngAfterViewInit(): void {
@@ -35,7 +38,34 @@ export class StudentListComponent implements AfterViewInit, OnDestroy {
   }
 
   openStudentProfile(uid: string): void {
-    this.router.navigate(['lista-alumnos', 'perfil'], { queryParams: { uid  } });
+    this.router.navigate(['lista-alumnos', 'perfil'], { queryParams: { uid } });
+  }
+
+  downloadExcel(): void {
+    console.log('Descargar Excel');
+    try {
+      const csv = parse(this.dataSource.data, {
+        fields: ["matricula", "curp", "apellido1", "apellido2", "nombre", "promedioGeneral", "carrera", "nombreDependencia", "directionDependencia", "nombreResponsable" ],
+      });
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+        var link = document.createElement("a");
+           // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "students.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+      console.log(csv);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  exportmap(users: UserData){
+
   }
 
   ngOnDestroy(): void {
