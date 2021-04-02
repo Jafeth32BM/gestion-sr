@@ -37,6 +37,10 @@
       <input formControlName="directionDependencia" matInput>
     </mat-form-field>
     <mat-form-field appearance="outline">
+      <mat-label>Municipio de la dependencia</mat-label>
+      <input formControlName="municipioDependencia" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nombre de la dependencia</mat-label>
       <input formControlName="nombreDependencia" matInput>
     </mat-form-field>
@@ -53,6 +57,59 @@
       <mat-select formControlName="carrera">
         <mat-option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Sexo</mat-label>
+      <mat-select formControlName="sexo">
+        <mat-option value="Femenino">Femenino</mat-option>
+        <mat-option value="Masculino">Masculino</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Numero de celular del estudiante</mat-label>
+      <input formControlName="numeroCelular" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de inicio</mat-label>
+      <input formControlName="fechaDeInicio" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de termino</mat-label>
+      <input formControlName="fechaDeTermino" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de registro</mat-label>
+      <input  formControlName="fechaDeRegistro" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>edad</mat-label>
+      <input type="number" min="0" max="100" formControlName="edad" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>porcentaje de creditos</mat-label>
+      <input  formControlName="porcentajeDeCreditos" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>sector</mat-label>
+      <mat-select formControlName="sector">
+        <mat-option *ngFor="let sector of sectores" [value]="sector">{{ sector}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>horario de servicio</mat-label>
+      <input  formControlName="horarioDeServicio" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre del proyecto</mat-label>
+      <input  formControlName="nombreDeProyecto" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>estimulo</mat-label>
+      <input formControlName="estimulo" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Monto de estimulo</mat-label>
+      <input formControlName="montoDeEstimulo" matInput>
     </mat-form-field>
     <button color="primary" mat-raised-button [disabled]="servicioSocialForm.invalid || loading"
       (click)="save()">Guardar</button>

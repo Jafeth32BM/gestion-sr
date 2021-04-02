@@ -5,6 +5,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserData } from '../models/user-data';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-servicio-social',
@@ -21,10 +22,23 @@ export class ServicioSocialComponent implements OnInit, OnDestroy {
     tipoServicioSocial: new FormControl('', [Validators.required]),
     curp: new FormControl('', [Validators.required]),
     directionDependencia: new FormControl('', [Validators.required]),
+    municipioDependencia: new FormControl('', [Validators.required]),
     nombreDependencia: new FormControl('', [Validators.required]),
     nombreResponsable: new FormControl('', [Validators.required]),
     promedioGeneral: new FormControl('', [Validators.required]),
     carrera: new FormControl(''),
+    sexo: new FormControl('', [Validators.required]),
+    numeroCelular: new FormControl('', [Validators.required]),
+    fechaDeInicio: new FormControl('', [Validators.required]),
+    fechaDeTermino: new FormControl('', [Validators.required]),
+    fechaDeRegistro: new FormControl('', [Validators.required]),
+    edad: new FormControl('', [Validators.required]),
+    porcentajeDeCreditos: new FormControl('', [Validators.required]),
+    sector: new FormControl(''),
+    horarioDeServicio: new FormControl('', [Validators.required]),
+    nombreDeProyecto: new FormControl('', [Validators.required]),
+    estimulo: new FormControl('', [Validators.required]),
+    montoDeEstimulo: new FormControl(''),
   });
   dataSubscription: Subscription;
   loading = false;
@@ -36,6 +50,16 @@ export class ServicioSocialComponent implements OnInit, OnDestroy {
     'Ing. Electromecanica',
     'ing. Electronica',
   ];
+  sectores: string[] = [
+    'Publico',
+    'Privado',
+    'Social',
+  ];
+
+  estimulo: string[] = [
+    'Con beca',
+    'Sin beca',
+  ]
 
   constructor(
     private firestore: AngularFirestore,
@@ -62,10 +86,23 @@ export class ServicioSocialComponent implements OnInit, OnDestroy {
         tipoServicioSocial: data.tipoServicioSocial || '',
         curp: data.curp || '',
         directionDependencia: data.directionDependencia || '',
+        municipioDependencia: data.municipioDependencia || '',
         nombreDependencia: data.nombreDependencia || '',
         nombreResponsable: data.nombreResponsable || '',
         promedioGeneral: data.promedioGeneral || null,
         carrera: data.carrera || '',
+        sexo: data.sexo || '',
+        numeroCelular: data.numeroCelular || null,
+        fechaDeInicio: data.fechaDeInicio || '' ,
+        fechaDeTermino: data.fechaDeTermino || '' ,
+        fechaDeRegistro: data.fechaDeRegistro || '' ,
+        edad: data.edad || null,
+        porcentajeDeCreditos: data.porcentajeDeCreditos || null,
+        sector: data.sector || '',
+        horarioDeServicio: data.horarioDeServicio || '',
+        nombreDeProyecto: data.nombreDeProyecto ||'',
+        estimulo: data.estimulo || '',
+        montoDeEstimulo: data.montoDeEstimulo || null,
       });
     });
   }

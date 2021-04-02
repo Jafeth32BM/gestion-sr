@@ -12,10 +12,25 @@ export interface UserData {
   documentos: { [key: string]: DocumentoData };
   curp: string;
   directionDependencia: string;
+  municipioDependencia: string;
   nombreDependencia: string;
   nombreResponsable: string;
   promedioGeneral: number;
   carrera: string;
+  sexo: 'Femenino' | 'Masculino';
+  numeroCelular: number;
+  fechaDeInicio: Date;
+  fechaDeTermino: Date;
+  fechaDeRegistro: Date;
+  edad: number;
+  porcentajeDeCreditos: number;
+  sector: string;
+  horarioDeServicio: {date: 'HH:mm:ss-SS'};
+  nombreDeProyecto: string;
+  estimulo: string;
+  montoDeEstimulo: number;
+
+
 }
 
 export interface DocumentoData {

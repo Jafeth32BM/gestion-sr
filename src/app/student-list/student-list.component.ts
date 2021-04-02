@@ -45,7 +45,7 @@ export class StudentListComponent implements AfterViewInit, OnDestroy {
     console.log('Descargar Excel');
     try {
       const csv = parse(this.dataSource.data, {
-        fields: ["matricula", "curp", "apellido1", "apellido2", "nombre", "promedioGeneral", "carrera", "nombreDependencia", "directionDependencia", "nombreResponsable" ],
+        fields: ["curp", "matricula", "apellido1", "apellido2", "nombre", "carrera", "sexo", "email", "numeroCelular", "fechaDeInicio", "fechaDeTermino", "fechaDeRegistro", "edad", "promedioGeneral", "porcentajeDeCreditos", "nombreDependencia", "directionDependencia", "municipioDependencia", "sector", "horarioDeServicio", "nombreDeProyecto", "estimulo", "montoDeEstimulo" ],
       });
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
 
