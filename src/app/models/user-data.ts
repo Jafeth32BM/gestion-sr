@@ -1,4 +1,5 @@
 import { EstadoDocumento } from '../enums/estado-documento.e';
+import { TipoDeDocumento } from '../static-data/documentos';
 export interface UserData {
   uid: string;
   nombre: string;
@@ -38,4 +39,5 @@ export interface DocumentoData {
   uploaded_at: firebase.firestore.Timestamp;
   path: string;
   url: string;
+  tipo: TipoDeDocumento;
 }

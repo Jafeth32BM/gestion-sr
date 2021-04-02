@@ -6,16 +6,17 @@
           (click)="goToTescha()">{{ link }}</a></p>
       <p><strong>Para solicitar tu carta de presentación se requieren los siguietes documentos:</strong></p>
 
-      <div class="w-full document-table">
+      <div *ngFor="let documents of tramite.documentGroups" class="w-full document-table mb-4">
+        <h2>{{ documents?.groupName }}</h2>
         <table class="w-full">
           <tr>
-            <th class="text-left">Documento</th>
+            <th class="text-left w-full">Documento</th>
             <th class="text-left">Estado</th>
             <th></th>
             <th></th>
           </tr>
-          <tr *ngFor="let document of tramite.documentos">
-            <td>{{ document.name }}</td>
+          <tr *ngFor="let document of documents.documentos">
+            <td class="w-full">{{ document.name }}</td>
             <td class="flex items-center icon">
               <app-document-state [estado]="userData?.documentos[document.tipo]?.estado"></app-document-state>
             </td>
@@ -24,7 +25,8 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item *ngIf="userData?.documentos[document.tipo]" (click)="download(document)">Descargar</button>
+                <button mat-menu-item *ngIf="userData?.documentos[document.tipo]"
+                  (click)="download(document)">Descargar</button>
                 <button mat-menu-item *ngIf="userData?.documentos[document.tipo]?.estado !== EstadoDocumento.Aceptado"
                   (click)="upload(document.tipo, inputFile)">Upload</button>
               </mat-menu>

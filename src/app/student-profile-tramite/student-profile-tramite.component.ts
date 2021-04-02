@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { DocumentData } from '@angular/fire/firestore';
 import { EstadoDocumento } from '../enums/estado-documento.e';
 import { FileTopics } from '../enums/file-topics.e';
-import { UserData } from '../models/user-data';
+import { DocumentoData, UserData } from '../models/user-data';
 import { StorageService } from '../services/storage.service';
 import { Documento, Tramite } from '../static-data/documentos';
 
@@ -27,20 +28,11 @@ export class StudentProfileTramiteComponent {
     link.remove();
   }
 
-  aceptarDocumento(documento: Documento): void {
-    console.log(documento);
-    this.storage.changeDocumentState(
-      documento.tipo,
-      EstadoDocumento.Aceptado,
-      this.userData.uid
-    );
+  aceptarDocumento(userData: UserData, documento: DocumentoData): void {
+    this.storage.validateDocument(userData, documento);
   }
 
-  rechazarDocumento(documento: Documento): void {
-    this.storage.changeDocumentState(
-      documento.tipo,
-      EstadoDocumento.Rechazado,
-      this.userData.uid
-    );
+  rechazarDocumento(userData: UserData, documento: DocumentoData): void {
+    this.storage.invalidateDocument(userData, documento);
   }
 }

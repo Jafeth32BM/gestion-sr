@@ -1,11 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import firebase from 'firebase';
 import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EstadoDocumento } from '../enums/estado-documento.e';
 import { FileTopics } from '../enums/file-topics.e';
-import { UserData } from '../models/user-data';
+import { DocumentoData, UserData } from '../models/user-data';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import {
@@ -69,9 +70,11 @@ export class TramiteComponent implements OnDestroy {
   fileUpload(event): void {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      const document = this.tramite.documentos.find(
-        (d) => d.tipo === this.documentToUpload
+      var documentos: Documento[] = [].concat.apply(
+        [],
+        this.tramite.documentGroups.map((g) => g.documentos)
       );
+      const document = documentos.find((d) => d.tipo === this.documentToUpload);
       const file = fileList.item(0);
       console.log(file);
       const task = this.storage.uploadFile(
@@ -80,13 +83,21 @@ export class TramiteComponent implements OnDestroy {
         document.name.split(' ').join('-')
       );
       this.uploadProgress = task.percentageChanges();
-      task.then((task: firebase.storage.UploadTaskSnapshot) => {
-        this.storage.changeDocumentState(
-          this.documentToUpload,
-          EstadoDocumento.Pendiente,
-          null,
-          task.ref
-        );
+      task.then(async (task: firebase.storage.UploadTaskSnapshot) => {
+        // this.storage.changeDocumentState(
+        //   this.documentToUpload,
+        //   EstadoDocumento.Pendiente,
+        //   null,
+        //   task.ref
+        // );
+        const newDocument: DocumentoData = {
+          estado: EstadoDocumento.Pendiente,
+          tipo: this.documentToUpload,
+          path: task.ref.fullPath,
+          uploaded_at: firebase.firestore.Timestamp.now(),
+          url: await task.ref.getDownloadURL(),
+        };
+        this.storage.addFileToFirestore(this.userData, newDocument);
         this.uploadProgress = undefined;
         event.target.value = '';
         this.snackbar.open(

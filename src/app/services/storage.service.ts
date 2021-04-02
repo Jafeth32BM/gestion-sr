@@ -1,5 +1,4 @@
-import { TipoDeDocumento } from './../static-data/documentos';
-import { DocumentoData } from '../models/user-data';
+import { DocumentoData, UserData } from '../models/user-data';
 import { EstadoDocumento } from '../enums/estado-documento.e';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FileTopics } from './../enums/file-topics.e';
@@ -9,7 +8,6 @@ import {
   AngularFireStorage,
   AngularFireUploadTask,
 } from '@angular/fire/storage';
-import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -39,42 +37,47 @@ export class StorageService {
     return splitedName[splitedName.length - 1];
   }
 
-  async changeDocumentState(
-    documentType: TipoDeDocumento,
-    estado: EstadoDocumento,
-    uid?: string,
-    ref?: firebase.storage.Reference
+  async validateDocument(
+    userData: UserData,
+    documento: DocumentoData
   ): Promise<void> {
-    if (!uid) {
-      uid = this.auth.user$.getValue().uid;
+    userData.documentos[documento.tipo].estado = EstadoDocumento.Aceptado;
+    if (userData?.uid) {
+      this.firestore
+        .collection('users')
+        .doc(userData.uid)
+        .set({ documentos: userData.documentos }, { merge: true });
     }
-    const documentos: { [key: string]: DocumentoData } =
-      this.auth.data$.getValue().documentos || {};
-    let url: string | null;
-    if (ref) {
-      url = await ref.getDownloadURL();
-    }
-    const documento = documentos[documentType];
-    if (documento) {
-      documentos[documentType] = {
-        ...documentos[documentType],
-        estado,
-        uploaded_at: firebase.firestore.Timestamp.now(),
-      };
-    } else {
-      documentos[documentType] = {
-        estado,
-        uploaded_at: firebase.firestore.Timestamp.now(),
-        path: ref.fullPath,
-        url,
-      };
-    }
+  }
 
-    if (uid) {
+  async invalidateDocument(
+    userData: UserData,
+    documento: DocumentoData
+  ): Promise<void> {
+    userData.documentos[documento.tipo].estado = EstadoDocumento.Rechazado;
+    if (userData?.uid) {
+      this.firestore
+        .collection('users')
+        .doc(userData.uid)
+        .set({ documentos: userData.documentos }, { merge: true });
+    }
+  }
+
+  async addFileToFirestore(
+    userData: UserData,
+    documento: DocumentoData
+  ): Promise<void> {
+    const uid = this.auth.user$.getValue().uid;
+    if (!userData.documentos) {
+      userData.documentos = {};
+    }
+    userData.documentos[documento.tipo] = documento;
+
+    if (uid && !!userData?.documentos) {
       this.firestore
         .collection('users')
         .doc(uid)
-        .set({ documentos }, { merge: true });
+        .set({ documentos: userData.documentos }, { merge: true });
     }
   }
 }
