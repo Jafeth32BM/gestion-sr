@@ -112,96 +112,96 @@ export const documentsRES: DocumentosResidencia = {
   CartaFormal: { tipo: TipoDeDocumento.RESCartaFormal, name: 'Carta formal' },
   ConstanciaDeCreditos: {
     tipo: TipoDeDocumento.RESConstanciaDeCreditos,
-    name: 'Constancia de creditos',
+    name: 'CONSTANCIA DE CREDITOS',
   },
   HistorialAcademico: {
     tipo: TipoDeDocumento.RESHistorialAcademico,
-    name: 'Historial academico',
+    name: 'HISTORIAL ACADEMICO',
   },
   CartaResponsiva: {
     tipo: TipoDeDocumento.RESCartaResponsiva,
-    name: 'Carta responsiva',
+    name: 'CARTA RESPONSIVA',
   },
 };
 
 export const documentsSSO: DocumentosSSO = {
   InformeMensualDeActividades: {
     tipo: TipoDeDocumento.SSOInformeMensualDeActividades,
-    name: 'Informe mensual de actividades',
+    name: 'INFORME MENSUAL DE ACTIVIDADES',
   },
   FormotaEvaluacionActividades: {
     tipo: TipoDeDocumento.SSOFormotaEvaluacionActividades,
     name:
-      'Formato de evaluación de las actividades por el prestador de servicio social',
+      'FORMATO DE EVALUACIÓN DE LAS ACTIVIDADES POR EL PRESTADOR DE SERVICIO SOCIAL',
   },
   ReporteFinal: {
     tipo: TipoDeDocumento.SSOReporteFinal,
-    name: 'Reporte final de servicio social',
+    name: 'REPORTE FINAL DE SERVICIO SOCIAL',
   },
   EvidenciaFotografica: {
     tipo: TipoDeDocumento.SSOEvidenciaFotografica,
-    name: 'Evidencia fotografica',
+    name: 'EVIDENCIA FOTOGRAFICA',
   },
   FormatoEvaluacionCualitativa: {
     tipo: TipoDeDocumento.SSOFormatoEvaluacionCualitativa,
-    name: 'Formato de evaluacion cualitativa del presador del servicio social',
+    name: 'FORMATO DE EVALUACÓN CUALITATIVA DEL PRESTADOR DE SERVICIO SOCIAL',
   },
   CartaAceptation: {
     tipo: TipoDeDocumento.SSOCartaAceptation,
-    name: 'Carta de aceptacion',
+    name: 'CARTA DE ACEPTACIÓN',
   },
   AnexoTecnico: {
     tipo: TipoDeDocumento.SSOAnexoTecnico,
-    name: 'Anexo tecnico',
+    name: 'ANEXO TECNICO',
   },
   CartaTerminacionSS: {
     tipo: TipoDeDocumento.SSOCartaTerminacionSS,
-    name: 'Carta de terminación de servicio social',
+    name: 'CARTA DE TERMINACIÓN DE SERVICIO SOCIAL',
   },
   InformeGlobal: {
     tipo: TipoDeDocumento.SSOInformeGlobal,
-    name: 'Informe global',
+    name: 'INFORME GLOBAL',
   },
   SolicitudRegistroAutorizacion: {
     tipo: TipoDeDocumento.SSOSolicitudRegistroAutorizacion,
-    name: 'Solicitud-registro/autorizacion',
+    name: 'SOLICITUD-REGISTRO/AUTORIZACIÓN',
   },
   SolicitudServicioSocial: {
     tipo: TipoDeDocumento.SSOSolicitudServicioSocial,
-    name: 'Solicitud de servicio social',
+    name: 'SOLICITUD DE SERVICIO SOCIAL',
   },
   ReporteBimestralServicioSocial: {
     tipo: TipoDeDocumento.SSOReporteBimestralServicioSocial,
-    name: 'Reporte bimestral de servicio social',
+    name: 'REPORTE BIMESTRAL DE SERVICIO SOCIAL',
   },
   CartaCompromisoServicioSocial: {
     tipo: TipoDeDocumento.SSOCartaCompromisoServicioSocial,
-    name: 'carta compromiso del servicio social',
+    name: 'CARTA COMPROMISO DEL SERVICIO SOCIAL',
   },
   LiberacionArt2191: {
     tipo: TipoDeDocumento.SSOLiberacionArt2191,
-    name: 'liberación ART 21ó 91',
+    name: 'LIBERACIÓN ART 21 ó 91',
   },
 };
 
 export const documentsSSC: DocumentosSSC = {
   SolicitudDeRegistro: {
     tipo: TipoDeDocumento.SSCSolicitudDeRegistro,
-    name: 'Solicitud de registro',
+    name: 'SOLICITUD DE REGISTRO',
   },
   GuiaEntrevista: {
     tipo: TipoDeDocumento.SSCGuiaEntrevista,
-    name: 'Guía de entrevista para candidatos',
+    name: 'GUÍA DE ENTREVISTA PARA CANDIDATOS',
   },
   ValoracionCompetenciasEspecificas: {
     tipo: TipoDeDocumento.SSCValoracionCompetenciasEspecificas,
-    name: 'Valoración de competencias Específicas',
+    name: 'VALORACIÓN DE COMPETENCIAS ESPECÍFICAS',
   },
   IneAl200: { tipo: TipoDeDocumento.SSCIneAl200, name: 'INE al 200%' },
   CurpAl200: { tipo: TipoDeDocumento.SSCCurpAl200, name: 'CURP al 200%' },
   HistorialAcademica: {
     tipo: TipoDeDocumento.SSCHistorialAcademica,
-    name: 'Historial Académico',
+    name: 'HISTORIAL ACADEMICO',
   },
 };
 
